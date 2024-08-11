@@ -3,11 +3,11 @@
 @section('content')
 
 <h2>
-    {{$listing['title']}}
+    {{$listings['title']}}
 </h2>
 
 <p>
-    {{$listing['description']}}
+    {{$listings['description']}}
 </p>
 
 @endsection
