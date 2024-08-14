@@ -39,6 +39,6 @@ class ListingController extends Controller
 
         Listing::create($validateData);
 
-        return redirect('/');
+        return redirect('/')->with('success', 'list created succesfully');
     }
 }
