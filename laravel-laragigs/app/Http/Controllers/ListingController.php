@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Listing;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class ListingController extends Controller
 {
@@ -18,5 +20,25 @@ class ListingController extends Controller
         return view('listings.show', [
             'listings' => $listing
         ]);
+    }
+
+    public function create(){
+        return view('listings.create');
+    }
+
+    public function store(Request $request){
+        $validateData = $request->validate([
+            'title' => 'required',
+            'company'=> ['required', Rule::unique('listings', 'company')],
+            'location' => 'required',
+            'email'=> 'required|email',
+            'website' => 'required',
+            'tags' => 'required',
+            'description' => 'required'
+        ]);
+
+        Listing::create($validateData);
+
+        return redirect('/');
     }
 }
