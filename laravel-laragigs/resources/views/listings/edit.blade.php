@@ -7,7 +7,7 @@
             <p class="mb-4">Edit: {{$listing->title}}</p>
         </header>
 
-        <form method="POST" action="/listings/{{$listings->id}}" enctype="multipart/form-data">
+        <form method="POST" action="/listings/{{$listing->id}}" enctype="multipart/form-data">
             @csrf
             @method('PUT')
             <div class="mb-6">
@@ -63,7 +63,7 @@
                     Tags (Comma Separated)
                 </label>
                 <input type="text" class="border border-gray-200 rounded p-2 w-full" name="tags"
-                    placeholder="Example: Laravel, Backend, Postgres, etc" value="{{$request->tags}}" />
+                    placeholder="Example: Laravel, Backend, Postgres, etc" value="{{$listing->tags}}" />
                 @error('tags')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror
@@ -86,7 +86,7 @@
                 </label>
                 <textarea class="border border-gray-200 rounded p-2 w-full" name="description" rows="10"
                     placeholder="Include tasks, requirements, salary, etc">
-                    {{$request->description}}
+                    {{$listing->description}}
                 </textarea>
                 @error('description')
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
