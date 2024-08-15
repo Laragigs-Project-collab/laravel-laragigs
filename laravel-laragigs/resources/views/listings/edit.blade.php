@@ -2,7 +2,7 @@
     <x-card class="p-10 max-w-lg mx-auto mt-24">
         <header class="text-center">
             <h2 class="text-2xl font-bold uppercase mb-1">
-                Edit Gig
+                Update Gig
             </h2>
             <p class="mb-4">Edit: {{$listing->title}}</p>
         </header>
@@ -95,9 +95,8 @@
 
             <div class="mb-6">
                 <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
-                    Create Gig
+                    Update Gig
                 </button>
-
                 <a href="/" class="text-black ml-4"> Back </a>
             </div>
         </form>
