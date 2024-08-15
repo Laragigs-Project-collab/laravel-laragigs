@@ -12,20 +12,25 @@ class ListingController extends Controller
     //
     public function index(){
         return view('listings.index', [
-            'listings' => Listing::latest()->filter(request(['tag', 'search']))->get()
+            'listings' => Listing::latest()->filter(request(['tag', 'search']))->paginate(4)
         ]);
     }
-
+    
     public function show(Listing $listing){
         return view('listings.show', [
             'listings' => $listing
         ]);
     }
-
+    
+    public function edit(Listing $listing){
+        return view('listings.edit', 
+            ['listings' => $listing
+        ]);
+    }
     public function create(){
         return view('listings.create');
     }
-
+    
     public function store(Request $request){
         $validateData = $request->validate([
             'title' => 'required',
@@ -37,8 +42,15 @@ class ListingController extends Controller
             'description' => 'required'
         ]);
 
+        if($request->hasFile('logo')){
+            $validateData['logo'] = $request->file('logo')->store('logos','public');
+        }
+
         Listing::create($validateData);
 
         return redirect('/')->with('success', 'list created succesfully');
     }
+
+
+    //show edit
 }
