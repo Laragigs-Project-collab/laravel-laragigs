@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ListingController;
+use App\Http\Controllers\Usercontroller;
 use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
 
@@ -25,3 +26,9 @@ Route::post('/listings', [ListingController::class, 'store']);
 
 //Destroy
 Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+
+//Show register
+Route::get('/register', [Usercontroller::class, 'register']);
+
+//cerate new user
+Route::post('/users', [Usercontroller::class, 'store']);
