@@ -27,8 +27,29 @@ class Usercontroller extends Controller
 
         $user = User::create($formValidation);
         //login
-        auth()->login($user);
+        Auth::login($user);
 
-        return redirect('/')->with('success', "user registered and loged in");
+        return redirect('/')->with('success', "User registered and Logged in");
+
+    }
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/')->with('success', 'You have been logged out.');
+    }
+    public function login() {
+        return view("users.login");
+    }
+    public function authenticate(Request $request){
+        $formValidation = $request->validate([
+            'email' => 'required', 'email',
+            'password' => 'required'
+        ]);
+        if (Auth::attempt($formValidation)) {
+            $request->session()->regenerate();
+            return redirect('/')->with('success', 'You are now logged in.');
+        }
+        return back()->withErrors(['email' => 'Invalid Credentials'])->onlyInput('email');
     }
 }
